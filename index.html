@@ -11,21 +11,23 @@
     <table id="board"></table>
   </body>
 
-  <script src="js/util.js"></script>
+  <script src="js/game.js"></script>
   <script src="js/board.js"></script>
   <script src="js/snake.js"></script>
-  <script src="js/game.js"></script>
+  <script src="js/util.js"></script>
+  <script src="js/config.js"></script>
   <script src="js/controls.js"></script>
 
   <script>
-    let board = createBoard(document);
-    let snake = createSnake(board);
-    let game = createGame();
+    let config = createConfig();
+    let board = createBoard(document, config.boardSize);
+    let controls = setupControls(window, config.keyBindings);
+    let snake = createSnake(controls, board, config.startSnakeSize);
+    let game = createGame(config.gameSpeed);
 
     board.render();
     snake.spawn();
 
-    setupControls(snake);
     game.start(snake, board);
   </script>
 </html>

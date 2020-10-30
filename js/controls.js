@@ -1,20 +1,21 @@
-let setupControls = (snake) => {
-  window.addEventListener("keydown", (evt) => {
-    switch (evt.key) {
-      case "ArrowUp":
-        snake.changeDirection({ x: 0, y: -1 });
-        break;
-      case "ArrowDown":
-        snake.changeDirection({ x: 0, y: 1 });
-        break;
-      case "ArrowLeft":
-        snake.changeDirection({ x: -1, y: 0 });
-        break;
-      case "ArrowRight":
-        snake.changeDirection({ x: 1, y: 0 });
-        break;
-    }
-  });
-};
+let setupControls = (window, keyBindings) => {
+  let controls = {};
 
-//TODO: não deixar cobra entrar nela mesma
+  let directions = {
+    up: { x: 0, y: -1 },
+    down: { x: 0, y: 1 },
+    left: { x: -1, y: 0 },
+    right: { x: 1, y: 0 },
+  };
+
+  for (const direction in keyBindings)
+    controls[keyBindings[direction]] = directions[direction];
+
+  controls.bind = (snake) =>
+    window.addEventListener("keydown", (evt) => {
+      if (!controls[evt.key]) return;
+      snake.changeDirection(controls[evt.key]);
+    });
+
+  return controls;
+};

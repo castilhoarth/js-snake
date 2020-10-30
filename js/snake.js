@@ -1,4 +1,4 @@
-let createSnake = (board, startSize = 3) => {
+let createSnake = (controls, board, startSize) => {
   let snake = {
     position: { x: 0, y: 0 },
     velocity: { x: 0, y: 0 },
@@ -29,6 +29,8 @@ let createSnake = (board, startSize = 3) => {
       tailSegment[stillAxis] = startPosition[stillAxis];
       snake.tail.push(tailSegment);
     }
+
+    controls.bind(snake);
 
     board.renderSnake(snake);
   };

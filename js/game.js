@@ -1,4 +1,4 @@
-let createGame = (config = { speed: 100 }) => {
+let createGame = (gameSpeed) => {
   let game = {};
   let running = false;
   let interval;
@@ -7,7 +7,7 @@ let createGame = (config = { speed: 100 }) => {
     if (running) return;
     running = true;
 
-    interval = setInterval(() => game.gameStep(snake, board), config.speed);
+    interval = setInterval(() => game.gameStep(snake, board), gameSpeed);
   };
 
   game.gameStep = (snake, board) => {

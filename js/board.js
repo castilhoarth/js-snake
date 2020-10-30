@@ -1,4 +1,4 @@
-let createBoard = (document, size = 20) => {
+let createBoard = (document, size) => {
   let board = {
     size: size,
   };
