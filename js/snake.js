@@ -55,15 +55,11 @@ let createSnake = (controls, board, startSize) => {
   };
 
   snake.collided = (board, food) => {
-    if (
-      snake.position.x >= board.size ||
-      snake.position.y >= board.size ||
-      snake.position.x < 0 ||
-      snake.position.y < 0
-    )
+    if (point.isOutside(snake.position, 0, 0, board.size, board.size))
       return board;
-
-    if (snake.position.x == food.x && snake.position.y == food.y) return food;
+    if (point.isSame(snake.position, food)) return food;
+    if (snake.tail.some((tail) => point.isSame(tail, snake.position)))
+      return snake;
   };
 
   snake.eat = (food) => {
