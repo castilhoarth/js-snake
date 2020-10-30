@@ -57,5 +57,9 @@ let createSnake = (controls, board, startSize) => {
     snake.velocity = newVelocity;
   };
 
+  snake.isIn = (position) =>
+    (snake.position.x == position.x && snake.position.y == position.y) ||
+    snake.tail.some((t) => t.x == position.x && t.y == position.y);
+
   return snake;
 };

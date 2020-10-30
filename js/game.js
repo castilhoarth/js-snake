@@ -11,12 +11,14 @@ let createGame = (gameSpeed) => {
   };
 
   game.gameStep = (snake, board) => {
+    const food = board.currentFood();
     snake.forward();
 
     if (snake.collided(board)) return game.over();
 
     board.render();
     board.renderSnake(snake);
+    board.renderFood(food);
   };
 
   game.over = () => {
