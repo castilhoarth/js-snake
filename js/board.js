@@ -28,6 +28,20 @@ let createBoard = (document, size) => {
     });
   };
 
+  board.renderHelp = (keyBindings) => {
+    document.getElementById("help").innerHTML = `
+      <tr>
+        <td></td>
+        <td><span class="keyboardKey">${keyBindings.up}</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="keyboardKey">${keyBindings.left}</span></td>
+        <td><span class="keyboardKey">${keyBindings.down}</span></td>
+        <td><span class="keyboardKey">${keyBindings.right}</span></td>
+      </tr>`;
+  };
+
   // food
   let food = { eaten: true };
 

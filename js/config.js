@@ -5,10 +5,24 @@ function createConfig() {
     boardSize: 20,
     startSnakeSize: 3,
     keyBindings: {
-      up: "ArrowUp",
-      down: "ArrowDown",
-      left: "ArrowLeft",
-      right: "ArrowRight",
+      arrows: {
+        up: "ArrowUp",
+        down: "ArrowDown",
+        left: "ArrowLeft",
+        right: "ArrowRight",
+      },
+      fps: {
+        up: "w",
+        down: "s",
+        left: "a",
+        right: "d",
+      },
+      vim: {
+        up: "k",
+        down: "j",
+        left: "h",
+        right: "l",
+      },
     },
   };
 }
