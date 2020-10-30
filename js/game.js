@@ -1,5 +1,7 @@
-let createGame = (gameSpeed) => {
-  let game = {};
+let createGame = (gameSpeed, pointsPerFood) => {
+  let game = {
+    score: 0,
+  };
   let running = false;
   let interval;
 
@@ -16,9 +18,12 @@ let createGame = (gameSpeed) => {
 
     const collision = snake.collided(board, food);
     if (collision === board || collision === snake) return game.over();
-    if (collision === food) snake.eat(food);
+    if (collision === food) {
+      snake.eat(food);
+      game.score += pointsPerFood;
+    }
 
-    board.render();
+    board.render(game.score);
     board.renderSnake(snake);
     board.renderFood(food);
   };

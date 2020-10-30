@@ -3,7 +3,7 @@ let createBoard = (document, size) => {
     size: size,
   };
 
-  board.render = () => {
+  board.render = (score = 0) => {
     let rendered = "";
     for (let x = 0; x < size; x++) {
       rendered += "<tr>";
@@ -12,6 +12,7 @@ let createBoard = (document, size) => {
       }
     }
     document.getElementById("board").innerHTML = rendered;
+    document.getElementById("score").innerHTML = `score: ${score}`;
   };
 
   board.renderSnake = (snake) => {

@@ -7,7 +7,7 @@
     <link href="snake.css" rel="stylesheet" />
   </head>
   <body>
-    <h1>HTML + JS Snake</h1>
+    <h1>HTML + JS Snake <small id="score">score: 0</small></h1>
     <table id="board"></table>
   </body>
 
@@ -23,7 +23,7 @@
     let board = createBoard(document, config.boardSize);
     let controls = setupControls(window, config.keyBindings);
     let snake = createSnake(controls, board, config.startSnakeSize);
-    let game = createGame(config.gameSpeed);
+    let game = createGame(config.gameSpeed, config.pointsPerFood);
 
     board.render();
     snake.spawn();
