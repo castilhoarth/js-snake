@@ -11,11 +11,18 @@ let setupControls = (window, keyBindings) => {
   for (const direction in keyBindings)
     controls[keyBindings[direction]] = directions[direction];
 
-  controls.bind = (snake) =>
+  let commands = [];
+  controls.bind = () => {
     window.addEventListener("keydown", (evt) => {
       if (!controls[evt.key]) return;
-      snake.changeDirection(controls[evt.key]);
+
+      let newVelocity = controls[evt.key];
+      if (commands.length > 2) commands = [newVelocity];
+      else commands.push(newVelocity);
     });
+  };
+
+  controls.issuedCommand = () => commands.shift();
 
   return controls;
 };

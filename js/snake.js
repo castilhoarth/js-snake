@@ -30,12 +30,13 @@ let createSnake = (controls, board, startSize) => {
       snake.tail.push(tailSegment);
     }
 
-    controls.bind(snake);
-
+    controls.bind();
     board.renderSnake(snake);
   };
 
   snake.forward = () => {
+    snake.changeDirection(controls.issuedCommand());
+
     let lastTail = snake.shouldGrow ? snake.tail.lastElement().copy() : null;
 
     for (let i = snake.tail.length - 1; i >= 0; i--) {
@@ -68,6 +69,8 @@ let createSnake = (controls, board, startSize) => {
   };
 
   snake.changeDirection = (newVelocity) => {
+    if (!newVelocity) return;
+
     let sumX = snake.velocity.x + newVelocity.x;
     let sumY = snake.velocity.y + newVelocity.y;
     // checking for invalid direction change
