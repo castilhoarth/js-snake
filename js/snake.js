@@ -36,10 +36,12 @@ let createSnake = (controls, board, startSize) => {
   };
 
   snake.forward = () => {
-    snake.tail.forEach((segment) => {
-      segment.x += snake.velocity.x;
-      segment.y += snake.velocity.y;
-    });
+    for (let i = snake.tail.length - 1; i >= 0; i--) {
+      let follower = snake.tail[i];
+      let leaderPosition = i == 0 ? snake.position : snake.tail[i - 1];
+      follower.x = leaderPosition.x;
+      follower.y = leaderPosition.y;
+    }
 
     snake.position.x += snake.velocity.x;
     snake.position.y += snake.velocity.y;
