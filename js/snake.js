@@ -54,6 +54,10 @@ let createSnake = (controls, board, startSize) => {
     snake.position.y < 0;
 
   snake.changeDirection = (newVelocity) => {
+    let sumX = snake.velocity.x + newVelocity.x;
+    let sumY = snake.velocity.y + newVelocity.y;
+    // checking for invalid direction change
+    if (sumX == 0 && sumY == 0) return;
     snake.velocity = newVelocity;
   };
 
