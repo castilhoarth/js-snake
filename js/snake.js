@@ -36,6 +36,8 @@ let createSnake = (controls, board, startSize) => {
   };
 
   snake.forward = () => {
+    let lastTail = snake.shouldGrow ? snake.tail.lastElement().copy() : null;
+
     for (let i = snake.tail.length - 1; i >= 0; i--) {
       let follower = snake.tail[i];
       let leaderPosition = i == 0 ? snake.position : snake.tail[i - 1];
@@ -43,15 +45,31 @@ let createSnake = (controls, board, startSize) => {
       follower.y = leaderPosition.y;
     }
 
+    if (snake.shouldGrow) {
+      snake.tail.push(lastTail);
+      snake.shouldGrow = false;
+    }
+
     snake.position.x += snake.velocity.x;
     snake.position.y += snake.velocity.y;
   };
 
-  snake.collided = (board) =>
-    snake.position.x >= board.size ||
-    snake.position.y >= board.size ||
-    snake.position.x < 0 ||
-    snake.position.y < 0;
+  snake.collided = (board, food) => {
+    if (
+      snake.position.x >= board.size ||
+      snake.position.y >= board.size ||
+      snake.position.x < 0 ||
+      snake.position.y < 0
+    )
+      return board;
+
+    if (snake.position.x == food.x && snake.position.y == food.y) return food;
+  };
+
+  snake.eat = (food) => {
+    food.eaten = true;
+    snake.shouldGrow = true;
+  };
 
   snake.changeDirection = (newVelocity) => {
     let sumX = snake.velocity.x + newVelocity.x;

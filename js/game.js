@@ -14,7 +14,9 @@ let createGame = (gameSpeed) => {
     const food = board.currentFood();
     snake.forward();
 
-    if (snake.collided(board)) return game.over();
+    const collision = snake.collided(board, food);
+    if (collision === board || collision === snake) return game.over();
+    if (collision === food) snake.eat(food);
 
     board.render();
     board.renderSnake(snake);
